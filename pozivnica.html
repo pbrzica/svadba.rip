@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pozivnica | Renata & Petar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'Parfumerie Script Curly';
+            src: url('./parfumerie-script-curly.otf') format('opentype');
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'New Icon Serif';
+            src: url('./new-icon-serif.otf') format('opentype');
+            font-display: swap;
+        }
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #f5f5f4;
+        }
+        .invite-stage {
+            position: relative;
+            width: 100%;
+            max-width: 72rem;
+            margin: 0 auto;
+        }
+        .invite-ratio {
+            display: block;
+            width: 100%;
+            padding-top: 181.7%;
+        }
+        .invite-frame {
+            position: absolute;
+            inset: 0;
+        }
+        .invite-image {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: opacity 700ms ease;
+        }
+        .invite-front {
+            opacity: 1;
+            z-index: 2;
+        }
+        .invite-inside {
+            opacity: 0;
+            z-index: 1;
+        }
+        .invite-monogram {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(4.5rem, 14vw, 11rem);
+            line-height: 1;
+            color: #000000;
+            z-index: 2;
+            transition: opacity 700ms ease;
+        }
+        .monogram-icon {
+            font-family: 'New Icon Serif', serif;
+        }
+        .monogram-r {
+            transform: translateX(0.06em);
+        }
+        .monogram-p {
+            transform: translateX(-0.06em);
+        }
+        .monogram-amp {
+            font-family: 'Parfumerie Script Curly', serif;
+            font-size: 2em;
+            margin: 0 0.08em;
+            transform: translateY(-0.16em);
+        }
+        .invite-stage.open .invite-front {
+            opacity: 0;
+        }
+        .invite-stage.open .invite-inside {
+            opacity: 1;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .invite-image {
+                transition-duration: 150ms;
+            }
+        }
+        @media (max-width: 768px) {
+            .invite-frame {
+                inset: 0;
+            }
+        }
+        @media (min-width: 1024px) {
+            .invite-stage {
+                max-width: min(30rem, calc((100vh - 0.5rem) * 0.5504));
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-0 md:p-1 text-stone-700">
+    <main class="w-full max-w-none">
+        <div id="inviteStage" class="invite-stage">
+            <span class="invite-ratio"></span>
+            <div class="invite-frame">
+                <div class="invite-front invite-monogram" aria-label="R and P"><span class="monogram-icon monogram-r">R</span><span class="monogram-amp">&amp;</span><span class="monogram-icon monogram-p">P</span></div>
+                <img src="./pozivnica.png" alt="Pozivnica - unutarnja strana" class="invite-image invite-inside" loading="eager">
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const preloadImage = new Image();
+        preloadImage.src = "./pozivnica.png";
+
+        const inviteStage = document.getElementById("inviteStage");
+
+        window.addEventListener("load", function () {
+            setTimeout(function () {
+                inviteStage.classList.add("open");
+            }, 800);
+        });
+    </script>
+</body>
+</html>

@@ -22,7 +22,7 @@
 
     <div class="text-center">
         
-        <h1 class="font-playfair text-5xl md:text-7xl font-bold text-stone-800 tracking-tight">
+        <h1 class="font-playfair text-6xl md:text-8xl font-bold text-stone-800 tracking-tight">
             Renata & Petar
         </h1>
 
@@ -47,22 +47,27 @@
 
         <p class="font-playfair text-xl md:text-2xl text-stone-600">29. svibnja 2026.</p>
 
+        <a href="pozivnica.html" class="inline-flex items-center justify-center mt-8 mb-8 px-8 py-3 rounded-full border border-stone-400 bg-stone-100 text-stone-700 text-sm md:text-base font-normal uppercase tracking-[0.2em] hover:bg-stone-200 hover:text-stone-900 transition-colors duration-300">
+            Pozivnica
+        </a>
+
     </div>
 
     <script>
-        // Set the date we're counting down to: 29th May 2026, 17:00
-        const countDownDate = new Date("2026-05-29T17:00:00").getTime();
+        // Set the date we're counting down to: 29th May 2026, 14:30 (Europe/Zagreb)
+        const countDownDate = new Date("2026-05-29T14:30:00+02:00").getTime();
 
         // Update the count down every 1 second
         const countdownInterval = setInterval(function() {
             const now = new Date().getTime();
             const distance = countDownDate - now;
 
-            // Time calculations
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            // Time calculations (clamp at zero after countdown ends)
+            const clampedDistance = Math.max(distance, 0);
+            const days = Math.floor(clampedDistance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((clampedDistance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((clampedDistance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((clampedDistance % (1000 * 60)) / 1000);
 
             // Display the results
             document.getElementById("days").innerText = days;
@@ -70,14 +75,12 @@
             document.getElementById("minutes").innerText = minutes;
             document.getElementById("seconds").innerText = seconds;
 
-            // If the count down is finished, display a message
-            if (distance < 0) {
+            // If the count down is finished, keep zeros and stop updates
+            if (distance <= 0) {
                 clearInterval(countdownInterval);
-                document.getElementById("countdown").innerHTML = '<div class="w-full text-2xl font-playfair">Sretno vjenčanje!</div>';
             }
         }, 1000);
     </script>
 
 </body>
 </html>
-
